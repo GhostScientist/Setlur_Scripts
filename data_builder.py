@@ -27,8 +27,6 @@ used_subject_ids = []
 
 # This will build expression data.
 
-print("hello, let's see if this is reached.")
-
 for x in range(3, 50): # Will go through table 10.1's category list.
     print("You've finally begun a loop!")
     if (workspace_supp.cell(x, category_col).value) == '1':
