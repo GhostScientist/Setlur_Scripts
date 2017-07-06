@@ -103,6 +103,55 @@ def chr_counter():
         chr_count_list[chr-1]+= 1
     print(chr_count_list)
 
+def CNV_Size_tracker():
+
+
+    if chr = 1:
+
+    if chr = 2:
+
+    if chr = 3:
+
+    if chr = 4:
+
+    if chr = 5:
+
+    if chr = 6:
+
+    if chr = 7:
+
+    if chr = 8:
+
+    if chr = 9:
+
+    if chr = 10:
+
+    if chr = 11:
+
+    if chr = 12:
+
+    if chr = 13:
+
+    if chr = 14:
+
+    if chr = 15:
+
+    if chr = 16:
+
+    if chr = 17:
+
+    if chr = 18:
+
+    if chr = 19:
+
+    if chr = 20:
+
+    if chr = 21:
+
+    if chr = 22:
+
+
+
 
 def main():
     chr_counter()
