@@ -1,9 +1,6 @@
 import xlrd
 import pickle
 
-
-
-
 mmc4_workbook = xlrd.open_workbook('/Users/dakotakim/Desktop/pySpear_Script/mmc4.xlsx')
 supp_workbook = xlrd.open_workbook('/Users/dakotakim/Desktop/pySpear_Script/dakota_supp_table.xlsx')
 
@@ -30,6 +27,36 @@ class intersected_data(object):
         self.y_begin = y_begin
         self.y_end = y_end
 
+base_pair_info = []
+for i in range(1, 23):
+    base_pair_info.append(i)
+
+base_pair_info = [
+    [1, 248956422],
+    [1, 242193529],
+    [1, 198295559],
+    [1, 190214555],
+    [1, 181538259],
+    [1, 170805979],
+    [1, 159345973],
+    [1, 145138636],
+    [1, 138394717],
+    [1, 133797422],
+    [1, 135086622],
+    [1, 133275309],
+    [1, 114364328],
+    [1, 107043718],
+    [1, 101991189],
+    [1, 90338345],
+    [1, 83257441],
+    [1, 80373285],
+    [1, 58617616],
+    [1, 64444167],
+    [1, 46709983],
+    [1, 50818468]
+    ]
+
+
 # for mmc4
 chromosome_col = 0
 begin_col = 1
@@ -48,6 +75,32 @@ mmc4_list = []
 supp_list = []
 
 overlap_list = []
+
+chr1_sizelist = []
+chr2_sizelist = []
+chr3_sizelist = []
+chr4_sizelist = []
+chr5_sizelist = []
+chr6_sizelist = []
+chr7_sizelist = []
+chr8_sizelist = []
+chr9_sizelist = []
+chr10_sizelist = []
+chr11_sizelist = []
+chr12_sizelist = []
+chr13_sizelist = []
+chr14_sizelist = []
+chr15_sizelist = []
+chr16_sizelist = []
+chr17_sizelist = []
+chr18sizelist = []
+chr19sizelist = []
+chr20_sizelist = []
+chr21_sizelist = []
+chr22_sizelist = []
+
+
+
 
 
 def mmc4_listbuilder():
@@ -94,64 +147,72 @@ def overlap(one_list, second_list):
                             """ % (second_list[y].gene, one_list[x].chr, one_list[x].cell_row, second_list[y].cell_row, one_list[x].begin, one_list[x].end, second_list[y].begin, second_list[y].end))
     print("Total count is %d" % count)
 
-def chr_counter():
+#def chr_counter():
+    #chr_count_list = []
+    #for x in range(1, 23):
+        #chr_count_list.append(0) # Initializes list with 0 count for each chromosome.
+    #for x in range(0, 850): #This is the chrom-count from the SuppTble set.
+        #chr = int(supp_sheet.cell(x, chrom_col).value)
+        #chr_count_list[chr-1]+= 1
+    #print(chr_count_list
+
+def CNV_Size_and_Frequency_tracker(): # This function will count the frequency of CNVs per Chromsome and their corresponding sizes.
     chr_count_list = []
     for x in range(1, 23):
         chr_count_list.append(0) # Initializes list with 0 count for each chromosome.
-    for x in range(0, 850): #This is the chrom-count from the SuppTble set.
+
+    for x in range(0, 850):
         chr = int(supp_sheet.cell(x, chrom_col).value)
         chr_count_list[chr-1]+= 1
-    print(chr_count_list)
+        cnv_start = int(supp_sheet.cell(x, beg_col).value)
+        cnv_stop = int(supp_sheet.cell(x, ending_col).value)
+        cnv_size = int(cnv_stop - cnv_start)
+        if chr = 1:
+            chr1_sizelist.append(cnv_size)
+        elif chr = 2:
+            chr2_sizelist.append(cnv_size)
+        elif chr = 3:
+            chr3_sizelist.append(cnv_size)
+        elif chr = 4:
+            chr4_sizelist.append(cnv_size)
+        elif chr = 5:
+            chr5_sizelist.append(cnv_size)
+        elif chr = 6:
+            chr6_sizelist.append(cnv_size)
+        elif chr = 7:
+            chr7_sizelist.append(cnv_size)
+        elif chr = 8:
+            chr8_sizelist.append(cnv_size)
+        elif chr = 9:
+            chr9_sizelist.append(cnv_size)
+        elif chr = 10:
+            chr10_sizelist.append(cnv_size)
+        elif chr = 11:
+            chr11_sizelist.append(cnv_size)
+        elif chr = 12:
+            chr12_sizelist.append(cnv_size)
+        elif chr = 13:
+            chr13_sizelist.append(cnv_size)
+        elif chr = 14:
+            chr14_sizelist.append(cnv_size)
+        elif chr = 15:
+            chr15_sizelist.append(cnv_size)
+        elif chr = 16:
+            chr16_sizelist.append(cnv_size)
+        elif chr = 17:
+            chr17_sizelist.append(cnv_size)
+        elif chr = 18:
+            chr18_sizelist.append(cnv_size)
+        elif chr = 19:
+            chr19_sizelist.append(cnv_size)
+        elif chr = 20:
+            chr20_sizelist.append(cnv_size)
+        elif chr = 21:
+            chr21_sizelist.append(cnv_size)
+        elif chr = 22:
+            chr22_sizelist.append(cnv_size)
 
-def CNV_Size_tracker():
-
-
-    if chr = 1:
-
-    if chr = 2:
-
-    if chr = 3:
-
-    if chr = 4:
-
-    if chr = 5:
-
-    if chr = 6:
-
-    if chr = 7:
-
-    if chr = 8:
-
-    if chr = 9:
-
-    if chr = 10:
-
-    if chr = 11:
-
-    if chr = 12:
-
-    if chr = 13:
-
-    if chr = 14:
-
-    if chr = 15:
-
-    if chr = 16:
-
-    if chr = 17:
-
-    if chr = 18:
-
-    if chr = 19:
-
-    if chr = 20:
-
-    if chr = 21:
-
-    if chr = 22:
-
-
-
+def data_builder():
 
 def main():
     chr_counter()
