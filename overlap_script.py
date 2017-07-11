@@ -1,5 +1,7 @@
 import xlrd
-import pickle
+import xlsxwriter
+from random import *
+
 
 mmc4_workbook = xlrd.open_workbook('/Users/dakotakim/Desktop/pySpear_Script/mmc4.xlsx')
 supp_workbook = xlrd.open_workbook('/Users/dakotakim/Desktop/pySpear_Script/dakota_supp_table.xlsx')
@@ -16,7 +18,6 @@ class supp_gene_data(object):
             self.chr = chr
             self.begin = begin
             self.end = end
-            self.cell_row = cell_row
             self.gene = gene
 
 class intersected_data(object):
@@ -75,33 +76,7 @@ mmc4_list = []
 supp_list = []
 
 overlap_list = []
-
-chr1_sizelist = []
-chr2_sizelist = []
-chr3_sizelist = []
-chr4_sizelist = []
-chr5_sizelist = []
-chr6_sizelist = []
-chr7_sizelist = []
-chr8_sizelist = []
-chr9_sizelist = []
-chr10_sizelist = []
-chr11_sizelist = []
-chr12_sizelist = []
-chr13_sizelist = []
-chr14_sizelist = []
-chr15_sizelist = []
-chr16_sizelist = []
-chr17_sizelist = []
-chr18sizelist = []
-chr19sizelist = []
-chr20_sizelist = []
-chr21_sizelist = []
-chr22_sizelist = []
-
-
-
-
+size_list = [] # Will keep track of chromosomes and CNV sizes
 
 def mmc4_listbuilder():
     for x in range(0, 2187): # Number of rows.
@@ -111,7 +86,6 @@ def mmc4_listbuilder():
         end = int(mmc4_sheet.cell(x, end_col).value)
         temp_variable = gene_data(chromosome, begin, end, x);
         mmc4_list.append(temp_variable)
-
 
 def supp_listbuilder():
     for x in range(0, 850):
@@ -156,63 +130,37 @@ def overlap(one_list, second_list):
         #chr_count_list[chr-1]+= 1
     #print(chr_count_list
 
-def CNV_Size_and_Frequency_tracker(): # This function will count the frequency of CNVs per Chromsome and their corresponding sizes.
-    chr_count_list = []
-    for x in range(1, 23):
-        chr_count_list.append(0) # Initializes list with 0 count for each chromosome.
 
+def CNV_Size_and_Frequency_tracker(): # This function will count the frequency of CNVs per Chromsome and their corresponding sizes.
     for x in range(0, 850):
         chr = int(supp_sheet.cell(x, chrom_col).value)
-        chr_count_list[chr-1]+= 1
         cnv_start = int(supp_sheet.cell(x, beg_col).value)
         cnv_stop = int(supp_sheet.cell(x, ending_col).value)
         cnv_size = int(cnv_stop - cnv_start)
-        if chr = 1:
-            chr1_sizelist.append(cnv_size)
-        elif chr = 2:
-            chr2_sizelist.append(cnv_size)
-        elif chr = 3:
-            chr3_sizelist.append(cnv_size)
-        elif chr = 4:
-            chr4_sizelist.append(cnv_size)
-        elif chr = 5:
-            chr5_sizelist.append(cnv_size)
-        elif chr = 6:
-            chr6_sizelist.append(cnv_size)
-        elif chr = 7:
-            chr7_sizelist.append(cnv_size)
-        elif chr = 8:
-            chr8_sizelist.append(cnv_size)
-        elif chr = 9:
-            chr9_sizelist.append(cnv_size)
-        elif chr = 10:
-            chr10_sizelist.append(cnv_size)
-        elif chr = 11:
-            chr11_sizelist.append(cnv_size)
-        elif chr = 12:
-            chr12_sizelist.append(cnv_size)
-        elif chr = 13:
-            chr13_sizelist.append(cnv_size)
-        elif chr = 14:
-            chr14_sizelist.append(cnv_size)
-        elif chr = 15:
-            chr15_sizelist.append(cnv_size)
-        elif chr = 16:
-            chr16_sizelist.append(cnv_size)
-        elif chr = 17:
-            chr17_sizelist.append(cnv_size)
-        elif chr = 18:
-            chr18_sizelist.append(cnv_size)
-        elif chr = 19:
-            chr19_sizelist.append(cnv_size)
-        elif chr = 20:
-            chr20_sizelist.append(cnv_size)
-        elif chr = 21:
-            chr21_sizelist.append(cnv_size)
-        elif chr = 22:
-            chr22_sizelist.append(cnv_size)
+        size_list.append = [chr, cnv_size]
 
 def data_builder():
+    #This method will need to output 1000 different xlsx files. Computing intensive work.
+
+
+    for x in range(0,1000):
+        list_of_values = [] # will take lists as entries of the formate [chr, cnv_begin, cnv_end, size]
+        file_string = 'permutation_dataset'
+        file_name = file_string + str(x) + '.xlsx'
+        for each in size_list:
+            temp_size = each[1]
+            chr = each[0]
+            random_spot = randint(1, base_pair_info[chr-1][1])
+            if (random_spot + temp_size <= base_pair_info[chr-1][1]):
+                start_spot = random_spot
+                end_spot = random_spot + temp_size
+            elif (random_spot + temp_size > base_pair_info[chr-1][1]):
+                start_spot = random_spot - temp_size
+                end_spot = random_spot
+            list_of_values.append([chr, start_spot, end_spot, temp_size])
+
+
+
 
 def main():
     chr_counter()
