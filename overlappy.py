@@ -19,10 +19,10 @@ begin_column = 1
 end_column = 2
 
 # Constants for Permutation data
-p_chromosome_column = 0
-p_cnv_begin_column = 1
-p_cnv_end_column = 2
-p_cnv_size = 3
+p_chromosome_column = 1
+p_cnv_begin_column = 2
+p_cnv_end_column = 3
+p_cnv_size = 4
 
 TAD_list = []
 
@@ -58,8 +58,8 @@ def intersect(one_list, second_list): # One output per permutation file
 
 
 
-def p_set_builder(excel_file):
-    file_workbook = xlrd.open_workbook(excel_file)
+def p_set_builder():
+    file_workbook = xlrd.open_workbook('/Users/dakotakim/Desktop/Setlur_Scripts/dakota_supp_table.xlsx')
     file_worksheet = file_workbook.sheet_by_index(0)
     p_data_list = []
     for x in range(0, 850):
@@ -85,12 +85,11 @@ def output():
     print ("Is this reached?")
     mmc4_list_builder()
     overall_output = []
-    for x in range(0, 1000):
+    for x in range(0,1):
         print("On interation %d" % x)
         file = '/Users/dakotakim/Desktop/Setlur_Scripts/permutation/permutation_dataset%d.xlsx' % x
-        second_list = p_set_builder(file)
+        second_list = p_set_builder()
         overall_output.append(intersect(mmc4_list_builder(), second_list))
-        print(overall_output[x])
     print (overall_output)
 
 output()
