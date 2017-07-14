@@ -90,6 +90,11 @@ def output():
         file = '/Users/dakotakim/Desktop/Setlur_Scripts/permutation/permutation_dataset%d.xlsx' % x
         second_list = p_set_builder()
         overall_output.append(intersect(mmc4_list_builder(), second_list))
-    print (overall_output)
+    workbook = xlsxwriter.Workbook('overlap_output.xlsx')
+    worksheet = workbook.add_worksheet()
+    for x in range(0, 1000):
+        for y in range(0, 22):
+            worksheet.write(x,y, overlap_output[x][y])
+    workbook.close()
 
 output()
